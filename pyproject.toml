@@ -49,6 +49,9 @@ anthropic = [
 openai = [
     "langchain_openai",
 ]
+ollama = [
+    "langchain_ollama",
+]
 search = [
     "fastembed>=0.0.1",
 ]

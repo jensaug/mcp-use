@@ -6,7 +6,7 @@ anthropic.
 import asyncio
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 from mcp_use import MCPAgent, MCPClient
 
@@ -19,7 +19,7 @@ async def main():
     """Run the example using a configuration file."""
     load_dotenv()
     client = MCPClient(config=everything_server)
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+    llm = ChatOllama(model="qwen3:30b", base_url="http://localhost:11434", temperature=-0.1)
     agent = MCPAgent(llm=llm, client=client, max_steps=30)
 
     result = await agent.run(

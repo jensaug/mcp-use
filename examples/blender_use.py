@@ -15,7 +15,7 @@ Special thanks to https://github.com/ahujasid/blender-mcp for the server.
 import asyncio
 
 from dotenv import load_dotenv
-from langchain_anthropic import ChatAnthropic
+from langchain_ollama import ChatOllama
 
 from mcp_use import MCPAgent, MCPClient
 
@@ -30,7 +30,7 @@ async def run_blender_example():
     client = MCPClient.from_dict(config)
 
     # Create LLM
-    llm = ChatAnthropic(model="claude-3-5-sonnet-20240620")
+    llm = ChatOllama(model="qwen3:30b", base_url="http://localhost:11434", temperature=-0.1)
 
     # Create agent with the client
     agent = MCPAgent(llm=llm, client=client, max_steps=30)

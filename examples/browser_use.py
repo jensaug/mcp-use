@@ -11,7 +11,7 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 from mcp_use import MCPAgent, MCPClient
 
@@ -25,13 +25,10 @@ async def main():
     client = MCPClient.from_config_file(os.path.join(os.path.dirname(__file__), "browser_mcp.json"))
 
     # Create LLM
-    llm = ChatOpenAI(model="gpt-4o")
-    # llm = init_chat_model(model="llama-3.1-8b-instant", model_provider="groq")
-    # llm = ChatAnthropic(model="claude-3-")
-    # llm = ChatGroq(model="llama3-8b-8192")
+    llm = ChatOllama(model="qwen3:30b", base_url="http://localhost:11434", temperature=-0.1)
 
     # Create agent with the client
-    agent = MCPAgent(llm=llm, client=client, max_steps=30)
+    agent = MCPAgent(llm=llm, client=client, max_steps=10)
 
     # Run the query
     result = await agent.run(
